@@ -1,1 +1,1 @@
-web: gunicorn studygroup.studygroup:wsgi 
+web: gunicorn base:wsgi 
