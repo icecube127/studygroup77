@@ -1,0 +1,24 @@
+<div class="activities">
+  <div class="activities__header">
+    <h2>MathLab Point Leader</h2>
+  </div>
+
+  {% for profile in profiles %}
+  <div class="activities__box">
+    <div class="roomListRoom__header">
+      <a href="{% url 'user-profile' profile.user.id%}" class="roomListRoom__author">
+        <div class="avatar avatar--small">
+          <img src="{{profile.profile_pic.url}}" />
+        </div>
+        <span>@{{profile.user.username}}</span>
+      </a>
+    </div>
+    <div class="roomListRoom__content">
+      <p>{{profile.points}} Points</p>
+      
+    </div>
+  </div>
+  {% endfor %}
+
+    
+</div>

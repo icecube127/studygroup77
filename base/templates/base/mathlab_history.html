@@ -1,0 +1,33 @@
+{% extends 'main.html' %} {% block content %} 
+<br><br>
+{% csrf_token %}
+
+<table border="2" class="center">
+    <col width="200" />
+    <col width="200" />
+    <col width="200" />
+    <col width="200" />
+    <col width="200" />
+    <col width="200" />
+    <tr>
+        <th style="padding: 10px" class="mathsmall"> Date Taken </th>
+        <th style="padding: 10px" class="mathsmall"> Score </th>
+        <th style="padding: 10px" class="mathsmall"> Time </th>
+        <th style="padding: 10px" class="mathsmall"> Subject </th>
+        <th style="padding: 10px" class="mathsmall"> Level </th>
+        <th style="padding: 10px" class="mathsmall"> Number of Questions </th>
+    </tr>
+
+    {% for entry in my_history %}
+    <tr>
+        <td style="padding: 10px" class="mathsmall"> {{ entry.0 }}</td>
+        <td style="padding: 10px" class="mathsmall"> {{ entry.1 }}</td>
+        <td style="padding: 10px" class="mathsmall"> {{ entry.2 }} minutes </td>
+        <td style="padding: 10px" class="mathsmall"> {{ entry.3 }}</td>
+        <td style="padding: 10px" class="mathsmall"> {{ entry.4 }}</td>
+        <td style="padding: 10px" class="mathsmall"> {{ entry.5 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}

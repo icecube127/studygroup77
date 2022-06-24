@@ -1,0 +1,54 @@
+{% extends 'main.html' %} {% block content %}
+
+
+  <main class="profile-page layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      {% include 'base/component_topics.html' %}
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">
+        <div class="profile">
+          <div class="profile__avatar">
+            <div class="avatar avatar--large active">
+              <img src="{{user.profile.profile_pic.url}}"/>
+            </div>
+          </div>
+          <div class="profile__info">
+            <h3>{{user.first_name}} {{user.last_name}}</h3>
+            <p>@{{user.username}}</p>
+            {% if request.user == user %}
+            <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+            <a href="{% url 'mathlab-history' %}" class="btn btn--main btn--pill">Mathlab History</a>
+            {% endif %}
+          </div>
+          <div class="profile__about">
+            <h3>About Me</h3>
+            <p>{{user.profile.bio}}</p>
+          </div>
+          <div class="profile__about">
+            <h3>Math Lab Lifetime Points - <a href="{% url 'mathlab-points' %}">Points Guide</a></h3>
+            <div class="room__info"><h3>{{user.profile.points}} points</h3></div>
+          </div>
+        </div>
+
+        <div class="roomList__header">
+          <div>
+            <h2>Rooms Hosted by {{user.first_name}}</a>
+            </h2>
+          </div>
+        </div>
+
+        {% include 'base/component_feed.html' %}
+
+      </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      {% include 'base/component_activity.html' %}
+      <!-- Activities End -->
+    </div>
+  </main>
+
+  {% endblock content %}

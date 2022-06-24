@@ -1,0 +1,48 @@
+{% extends 'main.html' %} {% block content %} 
+<br><br>
+{% csrf_token %}
+<table border="2" class="center">
+    <col width="300" />
+    <col width="200" />
+    {% if question_type == '/R' %} 
+    <col width="200" />
+    {% endif %}
+    <col width="250" />
+    <tr>
+        <th class="mathhq" style="padding: 10px"> SCORE: {{ userScore }} </th>
+        <th class="mathhq" style="padding: 10px"> Answer </th>
+        {% if question_type == '/R' %} 
+        <th class="mathhq" style="padding: 10px"> Remainder </th>
+        {% endif %}
+        <th class="mathhq" style="padding: 10px"> Status </th>
+    </tr>
+
+    {% for question, answer, result in pagedata %}
+    <tr>
+        {% if question_type == '/R' %} 
+        <td class="mathha" style="padding: 10px">{{ question.0 }} / {{ question.1 }} = </td>
+        <td class="mathha" style="padding: 10px">{{ answer.0 }}</td>
+        <td class="mathha" style="padding: 10px">{{ answer.1 }}</td>
+        {% else %} 
+        <td class="mathha" style="padding: 10px">{{ question.0 }} {{ question.2 }} {{ question.1 }} = </td>
+        <td class="mathha" style="padding: 10px">{{ answer }}</td>
+        {% endif %}
+        <td class="mathha" style="padding: 10px">{{ result }}</td>
+    </tr>    
+    {% endfor %}
+
+    <tr>
+        <td class="mathsmall" style="padding: 10px">
+        <a button class="btn btn--math" href="{% url 'mathlab-setup' %}">Next Challenge</a>
+        </td>
+        <td class="mathsmall" style="padding: 10px">
+            <a button class="btn btn--math" href="{% url 'mathlab-history' %}">My History</a>
+        </td>
+        {% if question_type == '/R' %} 
+        <td></td>
+        {% endif %}
+        <td class="mathha" style="padding: 10px"> GOOD JOB!!! </td>
+    </tr>
+
+</table>
+{% endblock content %}

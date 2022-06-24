@@ -1,0 +1,60 @@
+{% extends 'main.html' %} {% block content %} 
+<br><br>
+<form action="{% url 'mathlab-questions' %}" method="POST">
+    {% csrf_token %}
+    <table border="2" class="center">
+      <col width="300" />
+      <col width="150" />
+      {% if operator == '/R' %} 
+      <col width="150" />
+      {% endif %}
+      <tr>
+        <th class="mathhq" style="padding: 10px">Question</th>
+        <th class="mathhq" style="padding: 10px">Answer</th>
+        {% if operator == '/R' %} 
+        <th class="mathhq" style="padding: 10px">Remainder</th>
+        {% endif %}
+      </tr>
+      
+      {% for question in questionBank %}
+      <tr>
+        {% if operator == '/R' %}
+        <td class="mathha" style="padding: 10px"> {{question.0}} / {{question.1}} = </td>
+        {% else %}
+        <td class="mathha" style="padding: 10px"> {{question.0}} {{question.2}} {{question.1}} = </td>
+        {% endif %}
+        <td style="padding: 10px"><div class="form-group"><input
+          type="number"
+          style="height:35px; width:200px; font-size:30px"
+          class="form-control"
+          name="answer{{question.3}}"
+          required="required"
+        /></div></td>
+        {% if operator == '/R' %}
+        <td style="padding: 10px"><div class="form-group"><input
+          type="number"
+          style="height:35px; width:200px; font-size:30px"
+          class="form-control"
+          name="remainder{{question.3}}"
+          required="required"
+        /></div></td>
+        {% endif %}
+      </tr>    
+      {% endfor %}
+
+      <tr>
+          <td class="mathha" style="padding: 10px">GOOD LUCK!!!</td></td>
+          <input type="hidden" name="question_bank" value="{{questionBank}}">
+          <input type="hidden" name="questions_type" value="{{operator}}">
+          <input type="hidden" name="quiz_id" value="{{quiz_id}}">
+          <input type="hidden" name="level" value="{{level}}">
+          <td style="padding: 10px"><button type="submit" class="btn btn--math">CHECK SCORE</button></td>
+          {% if operator == '/R' %} 
+          <td class="mathha" style="padding: 10px"> </td>
+          {% endif %}
+      </tr>
+    </table>
+  </form>
+
+
+{% endblock content %}

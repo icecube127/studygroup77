@@ -1,0 +1,66 @@
+{% extends 'main.html' %} {% block content %} 
+
+<main class="create-room layout">
+  <div class="container">
+    <div class="layout__box">
+      <div class="layout__boxHeader">
+        <div class="layout__boxTitle">
+          <a href="{{request.META.HTTP_REFERER}}">
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+            >
+              <title>arrow-left</title>
+              <path
+                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"
+              ></path>
+            </svg>
+          </a>
+          <h3>Math Practice</h3>
+        </div>
+      </div>
+      <div class="layout__body">
+        <form class="form" action="" method="POST">
+          {% csrf_token %}
+
+          <div class="form__group">
+            <label for="questions_type"><b>Type of Questions</b></label>
+              <select name="questions_type">
+                {% for question_type in questions_type %}
+                <option value="{{question_type}}"><b>{{question_type}}</b></option>
+                {% endfor %}
+              </select>
+          </div>
+
+          <div class="form__group">
+            <label for="questions_num"><b>How Many Questions</b></label>
+            <select name="questions_num">
+              {% for question_num in questions_num %}
+              <option value="{{question_num}}">{{question_num}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form__group">
+            <label for="questions_level"><b>Difficulty Level</b></label>
+            <select name="questions_level">
+              {% for question_level in questions_level %}
+              <option value="{{question_level}}">{{question_level}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form__action">
+            <a class="btn btn--dark" href="{% url 'home' %}">Cancel</a>
+            <button class="btn btn--main" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}
