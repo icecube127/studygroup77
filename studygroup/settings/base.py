@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import dj_database_url
-from dotenv import load_dotenv, find_dovenv
+from dotenv import load_dotenv, find_dotenv
 import os
 from pathlib import Path
 
@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'base.apps.BaseConfig',
     'django_extensions',
 ]
@@ -74,7 +73,7 @@ WSGI_APPLICATION = 'studygroup.wsgi.application'
 load_dotenv(find_dotenv())
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age==600, ssl_require=False)
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age=600, ssl_require=False)
 }
 
 
