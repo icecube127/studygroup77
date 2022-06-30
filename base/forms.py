@@ -33,8 +33,7 @@ class UpdateUserForm(ModelForm):
 class UpdateUserPicForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio', 'profile_pic']
+        fields = ['bio']
         labels = {
             'bio':'About Me', 
-            'profile_pic':'Profile Picture'
         }
