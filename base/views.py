@@ -6,7 +6,16 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Room, Topic, Message, Profile
-from .forms import RoomForm, UpdateUserForm, SignUpForm, UpdateUserPicForm
+from .forms import RoomForm, UpdateUserForm, SignUpForm, UpdateUserBio
+import random
+
+def randomProfilePic():
+    file_path = 'profileicons/'
+    file_extension = '.png'
+    file_name = random.randint(1, 9)
+
+    file = file_path + str(file_name) + file_extension
+    return file
 
 # Create your views here.
 
@@ -64,6 +73,9 @@ def registerPage(request):
             user.save()
             login(request, user)
             new_profile = Profile.objects.create(user=user)
+            #random_profile_pic = randomProfilePic()
+            #print(random_profile_pic)           
+            #new_profile.profile_pic = random_profile_pic
             return redirect('home')
         else:
             error_msg = form.errors
@@ -78,13 +90,19 @@ def updateUser(request):
     user = request.user
     profile = Profile.objects.get(user=user)
     form1 = UpdateUserForm(instance=user)
-    form2 = UpdateUserPicForm(instance=profile)
+    form2 = UpdateUserBio(instance=profile)
     context = {'form1':form1, 'form2':form2}
     
     if request.method == 'POST':
         form1 = UpdateUserForm(request.POST, instance=user)
-        form2 = UpdateUserPicForm(request.POST, request.FILES, instance=profile)
+        form2 = UpdateUserBio(request.POST, request.FILES, instance=profile)
         if form1.is_valid() and form2.is_valid():
+            if user.username == 'admin':
+                profile.profile_pic = 'profileicons/cap.png'
+            else:
+                if profile.profile_pic == 'profileicons/avatar.svg':
+                    random_profile_pic = randomProfilePic()
+                    profile.profile_pic = random_profile_pic
             form1.save()
             form2.save()
             return redirect('user-profile', pk=user.id)

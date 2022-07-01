@@ -5,7 +5,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     points = models.IntegerField(default=0)
     bio = models.CharField(max_length=120, default="Hello World!")
-    profile_pic = models.ImageField(default='avatar.svg')
+    profile_pic = models.ImageField(default='profileicons/avatar.svg')
 
     class Meta:
         ordering = ['-points']

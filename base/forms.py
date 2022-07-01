@@ -30,7 +30,7 @@ class UpdateUserForm(ModelForm):
             'first_name':'Name',
         }
 
-class UpdateUserPicForm(ModelForm):
+class UpdateUserBio(ModelForm):
     class Meta:
         model = Profile
         fields = ['bio']
