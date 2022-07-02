@@ -95,14 +95,8 @@ def updateUser(request):
     
     if request.method == 'POST':
         form1 = UpdateUserForm(request.POST, instance=user)
-        form2 = UpdateUserBio(request.POST, request.FILES, instance=profile)
+        form2 = UpdateUserBio(request.POST, instance=profile)
         if form1.is_valid() and form2.is_valid():
-            if user.username == 'admin':
-                profile.profile_pic = 'profileicons/cap.png'
-            else:
-                if profile.profile_pic == 'profileicons/avatar.svg':
-                    random_profile_pic = randomProfilePic()
-                    profile.profile_pic = random_profile_pic
             form1.save()
             form2.save()
             return redirect('user-profile', pk=user.id)
