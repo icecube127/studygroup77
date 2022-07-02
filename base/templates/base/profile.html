@@ -20,6 +20,7 @@
             <p>@{{user.username}}</p>
             {% if request.user == user %}
             <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+            <a href="{% url 'update-ProfilePic' %}" class="btn btn--main btn--pill">Profile Picture</a>
             <a href="{% url 'mathlab-history' %}" class="btn btn--main btn--pill">Mathlab History</a>
             {% endif %}
           </div>

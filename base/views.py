@@ -114,6 +114,33 @@ def updateUser(request):
             
     return render(request, 'base/update-user.html', context)
 
+###### UPDATE USER PROFILE PICTURE #######
+@login_required(login_url='login')
+def updateProfilePic(request):
+    user = request.user
+    #profile = Profile.objects.get(user=user)
+    icon_path = "/static/images/profileicons/"
+    extension = ".png"
+    #icons = ['profileicons/1.png', 'profileicons/2.png', 'profileicons/3.png',]
+    icons_row1 = ['1', '2', '3', '4']
+    icons_row2 = ['5', '6', '7', '8']
+    icons_row3 = ['cap', 'ironman', 'thor', 'bp']
+    context = {'icons1':icons_row1, 'icons2':icons_row2, 'icons3':icons_row3, 'path':icon_path, 'extension':extension}
+    
+    return render(request, 'base/update_profilepic.html', context)
+
+@login_required(login_url='login')
+def updatePic(request, img):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+
+    icon_path = "profileicons/"
+    extension = ".png"
+    path = icon_path + img + extension
+    profile.profile_pic = path
+    profile.save()
+    return render(request, 'base/profile.html')
+
 def home(request):
     # statement below gets what's in q value from home.html. Set it to blank if no value
     q = request.GET.get('q') if request.GET.get('q') != None else ''
