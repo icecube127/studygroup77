@@ -15,10 +15,9 @@ QUESTION_CHOICES = {
 }
 
 NUM_OF_QUESTIONS = {
-    '1 question': 1,
-    '2 questions': 2,
     '5 questions': 5,
-    '10 questions': 10
+    '10 questions': 10,
+    '20 questions': 20
 }
 
 DIFFICULTY = {
